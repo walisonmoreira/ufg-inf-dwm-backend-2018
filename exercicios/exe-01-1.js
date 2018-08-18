@@ -1,7 +1,3 @@
-const os = require('os');
+const osInfo = require('./exe-01-2');
 
-console.log(os.freemem());
-console.log(os.totalmem());
-console.log(os.cpus());
-console.log(os.arch());
-console.log(os.hostname());
+osInfo.show();
