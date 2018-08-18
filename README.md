@@ -44,7 +44,7 @@ Se o comando executar com sucesso, aparecerá algo assim:
 
 ### VirtualBox Guest Additions
 
-Para facilitar a utilização da VM, instalaremos o [*VirtualBox Guest Additions*](https://www.virtualbox.org/manual/ch04.html). Esse pacote facilitará a integração entre a máquina real e a máquina virtual. Entre os recursos que serão instalados com esse pacote, está o compartilhamento de área de transferência (Ctrl + C na máquina real e Ctrl + v na máquina virtual). Usaremos muito esse recurso.
+Para facilitar a utilização da VM, instalaremos o [*VirtualBox Guest Additions*](https://www.virtualbox.org/manual/ch04.html). Esse pacote facilitará a integração entre a máquina real e a máquina virtual. Entre os recursos que serão instalados com esse pacote, está o compartilhamento de área de transferência (Ctrl + C na máquina real e Ctrl + V na máquina virtual). Usaremos muito esse recurso.
 
 Durante a instalação, o guest additions precisa *construir* os seus *kernel modules*. Eles são necessários para garantir compatibilidade entre a versão do VirtualBox e a versão do Linux. Como a VM está com a instalação mínima do Ubuntu, os pacotes necessários para construir não estão disponíveis. Portanto, antes da instalação do guest additions, precisamos instalar os pacotes *gcc* e *make*.
 
@@ -60,7 +60,7 @@ Agora estamos prontos para instalar o VirtualBox Guest Additions.
 
 Certifique-se que a máquina virtual possui um dispositivo de CD. Isso é necessário por que será através dele que acessaremos o pacote de instalação do Guest Additions.
 
-Para isso, no VirtualBox vá ao menu *Machine / Settings... / Storage*. Na lista *Storage Devices* deve ter um dispositivo de CD com controlador *IDE* ou *SATA*. Tanto faz. Se o dispositivo estiver presente na VM ele aparecerá também na barra de status.
+Para isso, no VirtualBox vá ao menu *Machine / Settings... / Storage*. Na lista *Storage Devices* já deve existir um dispositivo de CD com controlador *IDE* ou *SATA*. Se não, crie um. Se o dispositivo estiver presente na VM ele aparecerá também na barra de status.
 
 ![Dispositivo de CD da VM](img/guest-additions-cd-device.png)
 
@@ -116,7 +116,7 @@ Alguns ícones foram adicionados e removidos da dock panel.
 
 ![Ícones adicionados e removidos da dock panel](img/customizacoes-icones-adicionados-removidos.png)
 
-O *Drag and Drop* foi desabilitado. Imfelizmente esse recurso está bastante instável.
+O *Drag and Drop* foi desabilitado. Infelizmente esse recurso está bastante instável.
 
 ![Drag and Drop desabilitado](img/customizacoes-drag-and-drop-desabilitado.png)
 
@@ -128,6 +128,20 @@ Foi criado um *Shared Folder* para troca de arquivos entre a máquina real e a v
 
 ```sh
 sudo adduser master vboxsf
+```
+
+## curl
+
+Instalando:
+
+```sh
+sudo apt install curl
+```
+
+Verificando:
+
+```sh
+curl -V
 ```
 
 ## Chrome
@@ -148,14 +162,13 @@ sudo rm -rf /usr/lib/firefox-addons
 Para instalar o Google Chrome, execute os seguintes comandos:
 
 ```sh
-wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-sudo apt install ./google-chrome-stable_current_amd64.deb
-rm ./google-chrome-stable_current_amd64.deb
+wget -O chrome.deb 'https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb'
+sudo dpkg -i chrome.deb
+sudo apt install -f
+rm chrome.deb
 ```
 
-![Chrome comandos](img/chrome-comandos.png)
-
-Após a instalação o Google Chrome estará disponível.
+Verificando:
 
 ![Chrome disponível](img/chrome-disponivel.png)
 
@@ -171,6 +184,11 @@ sudo apt install git
 
 ![Comandos de instalação do Git](img/git-comandos.png)
 
+Verificando:
+
+```sh
+git --version
+```
 
 ## Obtendo o repositório
 
@@ -184,4 +202,111 @@ Para obter o repositório é necessário fazer um clone.
 git clone https://github.com/walisonmoreira/ufg-inf-dwm-backend-2018
 ```
 
+Verificando:
+
 ![Obtendo o repositório da disciplina](img/obtendo-repositorio.png)
+
+## Visual Studio Code
+
+```sh
+wget -O vscode.deb 'http://go.microsoft.com/fwlink/?LinkID=760868'
+sudo dpkg -i vscode.deb
+sudo apt install -f
+rm vscode.deb
+```
+
+## NodeJS
+
+### Node
+
+Instalando:
+
+```sh
+sudo apt install nodejs
+```
+
+Verificando:
+
+```sh
+node --version
+```
+
+### NPM
+
+Instalando:
+
+```sh
+sudo apt install npm
+```
+
+Verificando:
+
+```sh
+npm --version
+```
+
+### Yarn
+
+Configurando repositório e obtendo lista de pacotes:
+
+```sh
+curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
+echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
+sudo apt update
+```
+
+Instalando:
+
+```sh
+sudo apt install yarn
+```
+
+Verificando:
+
+```sh
+yarn --version
+```
+
+## Java
+
+### JDK
+
+Instalando:
+
+```sh
+sudo apt install openjdk-8-jdk
+```
+
+Verificando:
+
+```sh
+java -version
+```
+
+### Maven
+
+Instalando:
+
+```sh
+sudo apt install maven
+```
+
+Verificando:
+
+```sh
+mvn --version
+```
+
+### Gradle
+
+Instalando:
+
+```sh
+sudo apt install gradle
+```
+
+Verificando:
+
+```sh
+gradle --version
+```
